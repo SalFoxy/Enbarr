@@ -1,33 +1,32 @@
 .card {
-  background: rgba(30, 30, 30, 0.6); /* Sfondo scuro semi-trasparente */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Bordo sottilissimo */
-  border-radius: 12px;
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px; /* Meno arrotondato */
   overflow: hidden;
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rimbalzo elastico */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
 }
 
-/* Effetto Hover */
 .card:hover {
-  transform: translateY(-10px); /* Si alza */
+  transform: translateY(-8px);
   background: rgba(40, 40, 40, 0.8);
   border-color: var(--color-gold);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.1); /* Glow Oro */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 12px rgba(212, 175, 55, 0.1);
 }
 
 .card-header {
-  padding: 1.5rem 1.5rem 0.5rem;
+  padding: 1.2rem 1.2rem 0.5rem; /* Padding ridotto */
 }
 
 .card-header h3 {
   color: var(--color-gold);
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.25rem; /* Ridotto da 1.6rem */
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 1rem;
+  padding-bottom: 0.8rem;
   transition: color 0.3s;
 }
 
@@ -37,7 +36,7 @@
 }
 
 .card-body {
-  padding: 1.5rem;
+  padding: 1.2rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -46,21 +45,20 @@
 
 .card-body p {
   color: #ccc;
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
+  font-size: 0.9rem; /* Testo più piccolo */
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
-/* Bottone Outline Moderno */
 .card-body button {
   background: transparent;
   border: 1px solid var(--color-crimson);
   color: var(--color-crimson-light);
-  padding: 0.8rem 1.5rem;
+  padding: 0.6rem 1.2rem; /* Pulsante più compatto */
   cursor: pointer;
   align-self: flex-start;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
+  font-size: 0.8rem; /* Font pulsante ridotto */
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   transition: all 0.3s ease;
   border-radius: 4px;
@@ -70,16 +68,15 @@
 .card-body button:hover {
   background: var(--color-crimson);
   color: #fff;
-  box-shadow: 0 0 15px var(--color-crimson);
+  box-shadow: 0 0 12px var(--color-crimson);
 }
 
-/* Responsive Extra Small */
 @media (max-width: 480px) {
   .card-header h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
   
   .card-body {
-    padding: 1.2rem;
+    padding: 1rem;
   }
 }

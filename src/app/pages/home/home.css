@@ -1,18 +1,17 @@
-/* Hero Section (Immagine Sfondo) */
+/* Hero Section */
 .hero {
   background-image: url('https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=1920&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
-  height: 85vh; /* Altezza quasi piena */
+  height: 75vh; /* Altezza leggermente ridotta */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-bottom: 4px solid var(--color-gold);
+  border-bottom: 3px solid var(--color-gold); /* Bordo più sottile */
 }
 
-/* Overlay Sfumato (Migliora leggibilità testo) */
 .overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -20,7 +19,6 @@
   z-index: 1;
 }
 
-/* Testo Hero */
 .hero-text {
   position: relative;
   z-index: 2;
@@ -28,104 +26,100 @@
   padding: 0 1rem;
 }
 
+/* Titolo Hero Molto Ridimensionato */
 .hero-text h1 {
-  font-size: 5rem;
+  font-size: 3.5rem; /* Ridotto da 5rem */
   color: var(--color-text);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
-  letter-spacing: 5px;
+  letter-spacing: 3px; /* Spaziatura ridotta */
   text-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
 
-/* Enbarr colorato */
 .hero-text h1 span {
   color: var(--color-crimson);
   text-shadow: 0 0 20px rgba(138, 28, 28, 0.6);
 }
 
 .hero-text p {
-  font-size: 1.5rem;
+  font-size: 1.1rem; /* Ridotto da 1.5rem */
   color: var(--color-gold);
   font-weight: 300;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   margin-top: 0;
   opacity: 0.9;
 }
 
-/* Contenitore Sezione */
+/* Container */
 .container {
-  max-width: 1400px;
+  max-width: 1200px; /* Max-width ridotta */
   margin: 0 auto;
-  padding: 6rem 2rem;
+  padding: 4rem 1.5rem; /* Padding ridotto */
   position: relative;
   z-index: 2;
 }
 
-/* Titolo Sezione Centrato */
+/* Titolo Sezione */
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 4rem;
+  font-size: 2rem; /* Ridotto da 2.5rem */
+  margin-bottom: 3rem;
   color: var(--color-gold);
   position: relative;
-  display: block; /* Blocca l'elemento per permettere text-align center */
+  display: block;
 }
 
-/* Linea decorativa sotto il titolo */
 .section-title::after {
   content: '';
   display: block;
-  width: 60px;
-  height: 3px;
+  width: 50px;
+  height: 2px; /* Linea più sottile */
   background: var(--color-crimson);
-  margin: 15px auto 0; /* Auto centra orizzontalmente */
-  box-shadow: 0 0 10px var(--color-crimson);
+  margin: 12px auto 0;
+  box-shadow: 0 0 8px var(--color-crimson);
 }
 
-/* Griglia Card */
+/* Griglia */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Card più compatte */
+  gap: 2rem;
 }
 
 /* --- RESPONSIVE --- */
-
-/* Mobile */
 @media (max-width: 768px) {
   .hero {
-    height: 60vh; /* Meno alta su mobile */
+    height: 55vh;
   }
 
   .hero-text h1 {
-    font-size: 2.8rem;
-    letter-spacing: 2px;
+    font-size: 2.2rem; /* Molto più piccolo su mobile */
+    letter-spacing: 1px;
   }
 
   .hero-text p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 2px;
   }
 
   .container {
-    padding: 3rem 1rem;
+    padding: 2.5rem 1rem;
   }
 
   .section-title {
-    font-size: 2rem;
-    margin-bottom: 2.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
   }
 
   .grid {
-    grid-template-columns: 1fr; /* Colonna singola */
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
-/* Tablet */
 @media (min-width: 769px) and (max-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr); /* Due colonne */
+    grid-template-columns: repeat(2, 1fr);
   }
 }

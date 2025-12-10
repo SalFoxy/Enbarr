@@ -1,132 +1,217 @@
-/* Container Navbar (Glassmorphism) */
+/* --- NAVBAR FLUTTUANTE GLASS (Desktop) --- */
 .navbar {
-  background: rgba(10, 10, 10, 0.95); /* Scuro e semi-trasparente */
-  backdrop-filter: blur(12px);       /* Effetto sfocatura sfondo */
-  padding: 1rem 2rem;
+  position: fixed;
+  top: 15px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  
+  background: rgba(12, 12, 12, 0.85); /* Sfondo scuro profondo */
+  backdrop-filter: blur(20px);        /* Sfocatura vetro potente */
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15); /* Bordo Oro */
+  border-radius: 50px; /* Pill Shape */
+  
+  padding: 0.6rem 2rem; 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Linea sottile oro */
-  position: sticky;
-  top: 0;
   z-index: 1000;
+  
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.9);
   transition: all 0.3s ease;
 }
 
-/* Logo (Testo con gradiente oro-rosso) */
+/* Logo */
 .logo {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   background: linear-gradient(45deg, var(--color-gold), var(--color-crimson));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
-  z-index: 1001; /* Sta sopra al menu mobile aperto */
+  /* Flex per centrare verticalmente il testo se necessario */
+  display: flex;
+  align-items: center;
 }
 
 /* Lista Link Desktop */
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
 }
 
-/* Link Navigazione */
 .nav-links a {
   text-decoration: none;
-  color: #aaa;
+  color: #bbb;
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  position: relative;
-  
-  /* Allineamento Icona + Testo */
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  position: relative;
 }
 
-/* Stile e Animazione Icona */
-.nav-icon {
-  transition: transform 0.3s ease, color 0.3s ease;
+/* Icona nei link (Specifico per nav-links, non globale) */
+.nav-links lucide-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
 }
 
+/* Hover Desktop */
 .nav-links a:hover {
   color: var(--color-gold);
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
 }
 
-.nav-links a:hover .nav-icon {
-  transform: translateY(-3px); /* Saltello in alto */
+.nav-links a:hover lucide-icon {
+  transform: translateY(-2px);
   color: var(--color-crimson);
 }
 
-/* Link Attivo */
+/* Link Attivo Desktop */
 .active-link {
   color: var(--color-gold) !important;
 }
 
 .active-link::after {
-  content: '';
+  content: '•';
   position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--color-crimson);
-  box-shadow: 0 0 5px var(--color-crimson);
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-crimson);
+  font-size: 1.2rem;
+  line-height: 0;
+  text-shadow: 0 0 5px var(--color-crimson);
 }
 
-/* Toggle Button (Hamburger) - Nascosto su Desktop */
+/* Toggle (Hamburger) - Nascosto di base */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   color: var(--color-gold);
   cursor: pointer;
-  z-index: 1001;
-  padding: 5px;
+  padding: 0; /* Reset padding */
+  transition: color 0.3s;
+  line-height: 0; /* Importante per rimuovere spazi verticali fantasma */
 }
 
-/* --- RESPONSIVE (Tablet e Mobile) --- */
+.menu-toggle:hover {
+  color: var(--color-crimson);
+}
+
+/* --- RESPONSIVE MOBILE (Tablet e Smartphone) --- */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 0.6rem 1.2rem;
+    width: 94%;
+    border-radius: 20px; /* Bordi leggermente meno curvi su mobile */
+  }
+
+  /* Mostra il pulsante menu e CENTRA il contenuto */
   .menu-toggle {
-    display: block; /* Mostra hamburger */
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 75%; /* Larghezza pannello laterale */
-    background: rgba(5, 5, 5, 0.98); /* Sfondo quasi solido */
-    flex-direction: column; /* Lista verticale */
-    justify-content: center;
+    display: flex; /* Flexbox per centrare l'icona */
     align-items: center;
-    gap: 2.5rem;
-    box-shadow: -5px 0 20px rgba(0,0,0,0.7);
-    border-left: 1px solid var(--color-gold);
+    justify-content: center;
+    width: 40px; /* Area di tocco quadrata */
+    height: 40px;
+  }
+  
+  /* Assicura che l'icona dentro il toggle abbia la dimensione giusta */
+  .menu-toggle lucide-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Menu Mobile a "Scheda Fluttuante" */
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 12px); /* Spazio sotto la navbar */
+    left: 0;
+    width: 100%;
     
-    /* Animazione Ingresso */
-    transform: translateX(100%); /* Nascondi a destra */
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    background: rgba(18, 18, 18, 0.98); /* Sfondo molto scuro */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 20px; /* Coerente con la navbar */
+    
+    flex-direction: column;
+    align-items: stretch; /* Allarga i pulsanti */
+    padding: 1rem;
+    gap: 0.5rem;
+    
+    box-shadow: 0 20px 50px rgba(0,0,0,0.95);
+    
+    /* Animazione Chiusura */
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Classe aggiunta via TS quando il menu è aperto */
+  /* Stato Aperto */
   .nav-links.open {
-    transform: translateX(0); /* Fai entrare */
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+    visibility: visible;
   }
 
+  /* Link Mobile (Stile Bottone) */
   .nav-links a {
-    font-size: 1.2rem; /* Testo più grande su mobile */
+    justify-content: flex-start; /* Allinea a sinistra */
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #ccc;
+    border: 1px solid transparent; /* Riserva spazio per bordo */
+    transition: all 0.2s;
+  }
+
+  /* Hover su Mobile */
+  .nav-links a:active,
+  .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-white);
+  }
+
+  /* Link Attivo su Mobile (Stile Evidenziato) */
+  .active-link {
+    background: rgba(212, 175, 55, 0.1) !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    color: var(--color-gold) !important;
+  }
+  
+  /* Nascondiamo il puntino decorativo desktop su mobile */
+  .active-link::after {
+    display: none;
+  }
+  
+  /* Icone su mobile */
+  .nav-links lucide-icon {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .nav-links a:hover lucide-icon {
+    transform: none; /* Disabilita saltello su mobile */
+    color: var(--color-gold);
   }
 }
