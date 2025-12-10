@@ -2,8 +2,11 @@
   <div class="logo">Enbarr</div>
   <ul class="nav-links">
     <li *ngFor="let item of navItems">
-      <a [routerLink]="[item.route]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
-        {{ item.label }}
+      <a [routerLink]="[item.route]" 
+         routerLinkActive="active-link" 
+         [routerLinkActiveOptions]="{exact: true}">
+        <lucide-icon [name]="item.icon" [size]="18" class="nav-icon"></lucide-icon>
+        <span>{{ item.label }}</span>
       </a>
     </li>
   </ul>

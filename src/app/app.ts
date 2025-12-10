@@ -1,15 +1,23 @@
-import { Component, signal } from '@angular/core'; // signal lo lasciamo anche se non lo usiamo subito
+import { Component, OnInit, signal } from '@angular/core'; // Aggiungi OnInit
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar'; // Verifica percorso
+import { NavbarComponent } from './components/navbar/navbar';
+import AOS from 'aos'; // Importa AOS
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent], // Aggiungi NavbarComponent
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  // Possiamo rimuovere il signal 'title' se non serve più, o lasciarlo
-  protected readonly title = signal('enbarr'); 
+export class App implements OnInit { // Implementa OnInit
+  
+  ngOnInit() {
+    AOS.init({
+      duration: 1000, // Durata animazione in ms
+      easing: 'ease-out-back', // Tipo di movimento fluido
+      once: true, // L'animazione avviene solo una volta
+      offset: 120 // Inizia l'animazione un po' prima
+    });
+  }
 }

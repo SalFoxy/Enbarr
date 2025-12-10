@@ -1,17 +1,19 @@
 <header class="hero">
-  <div class="overlay"></div> <div class="hero-text">
+  <div class="overlay"></div>
+  <div class="hero-text" data-aos="zoom-in" data-aos-duration="1500">
     <h1>Benvenuti a <span>Enbarr</span></h1>
-    <p>Città di Sangue e Oro</p>
+    <p data-aos="fade-up" data-aos-delay="400">Città di Sangue e Oro</p>
   </div>
 </header>
 
 <section class="container">
-  <h2 class="section-title">Cronache della Città</h2>
+  <h2 class="section-title" data-aos="fade-right">Cronache della Città</h2>
   <div class="grid">
     <app-card 
-      *ngFor="let card of loreCards" 
+      *ngFor="let card of loreCards; let i = index"
       [title]="card.title" 
-      [description]="card.description">
-    </app-card>
+      [description]="card.description"
+      [attr.data-aos]="'fade-up'"
+      [attr.data-aos-delay]="i * 150"> </app-card>
   </div>
 </section>
