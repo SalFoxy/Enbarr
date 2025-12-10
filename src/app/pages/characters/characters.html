@@ -15,13 +15,9 @@
       <div class="characters-group">
         <div class="character-card" *ngFor="let char of level.characters">
           
-          <div class="skin-box">
-            <app-skin-viewer 
-              [skinUrl]="char.skinUrl" 
-              [width]="160" 
-              [height]="280">
-            </app-skin-viewer>
-          </div>
+            <div class="skin-box">
+            <app-skin-viewer [skinUrl]="char.skinUrl"></app-skin-viewer>
+            </div>
 
           <div class="char-info">
             <h4>{{ char.name }}</h4>
