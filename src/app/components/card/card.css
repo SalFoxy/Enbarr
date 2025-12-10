@@ -1,56 +1,73 @@
 .card {
-  background-color: #fff;
-  border: 1px solid var(--color-black);
-  border-radius: 4px;
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
   height: 100%;
   display: flex;
   flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rimbalzo elastico */
+  position: relative;
 }
 
+/* Effetto Hover: la card si alza e si illumina */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 8px 8px 0px var(--color-gold);
-  border-color: var(--color-crimson);
+  transform: translateY(-10px);
+  background: rgba(40, 40, 40, 0.8);
+  border-color: var(--color-gold);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.1);
 }
 
 .card-header {
-  background-color: var(--color-crimson);
-  padding: 1rem;
-  text-align: center;
-  border-bottom: 2px solid var(--color-gold);
+  padding: 1.5rem 1.5rem 0.5rem;
 }
 
 .card-header h3 {
   color: var(--color-gold);
   margin: 0;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
+  font-size: 1.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 1rem;
+  transition: color 0.3s;
+}
+
+.card:hover .card-header h3 {
+  color: var(--color-gold-light);
+  border-bottom-color: var(--color-crimson);
 }
 
 .card-body {
   padding: 1.5rem;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1;
 }
 
+.card-body p {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* Bottone moderno "Outline" */
 .card-body button {
   background: transparent;
-  border: 2px solid var(--color-crimson);
-  color: var(--color-crimson);
-  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-crimson);
+  color: var(--color-crimson-light);
+  padding: 0.8rem 1.5rem;
   cursor: pointer;
   align-self: flex-start;
-  font-weight: bold;
-  transition: all 0.3s;
-  margin-top: 1rem;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border-radius: 4px;
 }
 
 .card-body button:hover {
-  background-color: var(--color-crimson);
-  color: var(--color-white);
+  background: var(--color-crimson);
+  color: #fff;
+  box-shadow: 0 0 15px var(--color-crimson); /* Glow rosso */
 }

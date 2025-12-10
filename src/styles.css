@@ -1,12 +1,18 @@
-/* Palette Enbarr */
 :root {
-  /* Colori */
-  --color-crimson: #7a1f1f; /* Rosso sangue rappreso */
-  --color-gold: #c5a059;    /* Oro antico */
-  --color-black: #1a1a1a;   /* Nero profondo */
-  --color-white: #fdfbf7;   /* Pergamena chiara */
-  --color-dark-gray: #2c2c2c;
-
+  /* Palette Premium */
+  --color-crimson: #8a1c1c;
+  --color-crimson-light: #b92b2b;
+  --color-gold: #d4af37;
+  --color-gold-light: #f3e5ab;
+  --color-black: #0a0a0a;
+  --color-dark-gray: #121212;
+  --color-text: #e0e0e0;
+  
+  /* Effetti */
+  --glass-bg: rgba(20, 20, 20, 0.7);
+  --glass-border: 1px solid rgba(212, 175, 55, 0.1);
+  --shadow-glow: 0 0 15px rgba(212, 175, 55, 0.15);
+  
   /* Font */
   --font-heading: 'Cinzel', serif;
   --font-body: 'Lato', sans-serif;
@@ -19,11 +25,27 @@
 }
 
 body {
-  background-color: var(--color-white);
-  color: var(--color-black);
+  background-color: var(--color-black);
+  color: var(--color-text);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
-h1, h2, h3, h4, button {
+h1, h2, h3, h4, .fantasy-font {
   font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Scrollbar personalizzata */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-crimson);
+  border-radius: 4px;
 }
