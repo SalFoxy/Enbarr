@@ -1,54 +1,42 @@
+/* Container Navbar (Glassmorphism) */
 .navbar {
-  background: rgba(10, 10, 10, 0.85); /* Semi-trasparente */
-  backdrop-filter: blur(12px); /* Effetto sfocatura vetro */
-  padding: 1.2rem 3rem;
+  background: rgba(10, 10, 10, 0.95); /* Scuro e semi-trasparente */
+  backdrop-filter: blur(12px);       /* Effetto sfocatura sfondo */
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Linea sottile oro */
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease;
 }
 
+/* Logo (Testo con gradiente oro-rosso) */
 .logo {
   font-family: var(--font-heading);
-  color: var(--color-gold);
   font-size: 1.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
   background: linear-gradient(45deg, var(--color-gold), var(--color-crimson));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; /* Testo gradiente */
+  -webkit-text-fill-color: transparent;
   cursor: pointer;
+  z-index: 1001; /* Sta sopra al menu mobile aperto */
 }
 
+/* Lista Link Desktop */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 2rem;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: #aaa;
-  font-family: var(--font-body);
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  transition: color 0.3s, text-shadow 0.3s;
-  position: relative;
-}
-
-/* Hover effect elegante */
-.nav-links a:hover {
-  color: var(--color-gold);
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-}
-
+/* Link Navigazione */
 .nav-links a {
   text-decoration: none;
   color: #aaa;
@@ -60,26 +48,32 @@
   transition: all 0.3s ease;
   position: relative;
   
-  /* Flexbox per allineare icona e testo */
+  /* Allineamento Icona + Testo */
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+/* Stile e Animazione Icona */
 .nav-icon {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--color-gold);
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
 }
 
 .nav-links a:hover .nav-icon {
-  transform: translateY(-2px); /* L'icona saltella leggermente */
+  transform: translateY(-3px); /* Saltello in alto */
   color: var(--color-crimson);
 }
 
+/* Link Attivo */
 .active-link {
   color: var(--color-gold) !important;
 }
 
-/* Linea sotto il link attivo */
 .active-link::after {
   content: '';
   position: absolute;
@@ -89,4 +83,50 @@
   height: 2px;
   background: var(--color-crimson);
   box-shadow: 0 0 5px var(--color-crimson);
+}
+
+/* Toggle Button (Hamburger) - Nascosto su Desktop */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-gold);
+  cursor: pointer;
+  z-index: 1001;
+  padding: 5px;
+}
+
+/* --- RESPONSIVE (Tablet e Mobile) --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Mostra hamburger */
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 75%; /* Larghezza pannello laterale */
+    background: rgba(5, 5, 5, 0.98); /* Sfondo quasi solido */
+    flex-direction: column; /* Lista verticale */
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.7);
+    border-left: 1px solid var(--color-gold);
+    
+    /* Animazione Ingresso */
+    transform: translateX(100%); /* Nascondi a destra */
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  /* Classe aggiunta via TS quando il menu è aperto */
+  .nav-links.open {
+    transform: translateX(0); /* Fai entrare */
+  }
+
+  .nav-links a {
+    font-size: 1.2rem; /* Testo più grande su mobile */
+  }
 }

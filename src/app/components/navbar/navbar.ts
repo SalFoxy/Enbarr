@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-// Importa il modulo e le icone specifiche
-import { LucideAngularModule, Home, Scroll, Sword, Users, Castle } from 'lucide-angular';
+// Aggiungi Menu e X alle importazioni
+import { LucideAngularModule, Home, Scroll, Sword, Users, Castle, Menu, X } from 'lucide-angular';
 
 @Component({
   selector: 'app-navbar',
@@ -12,12 +12,19 @@ import { LucideAngularModule, Home, Scroll, Sword, Users, Castle } from 'lucide-
   styleUrl: './navbar.css'
 })
 export class NavbarComponent {
-  // Esportiamo le icone per usarle nell'HTML
+  // Icone per il toggle del menu
+  readonly MenuIcon = Menu;
+  readonly CloseIcon = X;
+
+  // Icone navigazione
   readonly HomeIcon = Home;
   readonly LoreIcon = Scroll;
   readonly GamesIcon = Sword;
   readonly CharIcon = Users;
   readonly SetIcon = Castle;
+
+  // Stato del menu mobile
+  isMenuOpen = false;
 
   navItems = [
     { label: 'Home', route: '/', icon: this.HomeIcon },
@@ -26,4 +33,14 @@ export class NavbarComponent {
     { label: 'Games', route: '/games', icon: this.GamesIcon },
     { label: 'Personaggi', route: '/characters', icon: this.CharIcon }
   ];
+
+  // Funzione per alternare il menu
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  // Chiude il menu quando si clicca su un link
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
 }

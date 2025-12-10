@@ -1,15 +1,24 @@
+/* Importazione stili AOS (Animazioni) */
 @import 'aos/dist/aos.css';
+
 :root {
-  /* Palette Premium */
+  /* --- PALETTE PREMIUM FANTASY --- */
+  /* Rosso Cremisi (Sangue/Nobile) */
   --color-crimson: #8a1c1c;
   --color-crimson-light: #b92b2b;
+  
+  /* Oro (Ricchezza/Antico) */
   --color-gold: #d4af37;
   --color-gold-light: #f3e5ab;
+  
+  /* Sfondi Scuri */
   --color-black: #0a0a0a;
   --color-dark-gray: #121212;
+  
+  /* Testo */
   --color-text: #e0e0e0;
   
-  /* Effetti */
+  /* Effetti Vetro e Ombre */
   --glass-bg: rgba(20, 20, 20, 0.7);
   --glass-border: 1px solid rgba(212, 175, 55, 0.1);
   --shadow-glow: 0 0 15px rgba(212, 175, 55, 0.15);
@@ -33,13 +42,13 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, .fantasy-font {
+h1, h2, h3, h4, button, .fantasy-font {
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: 1px;
 }
 
-/* Scrollbar personalizzata */
+/* Scrollbar personalizzata (stile Chrome/Safari/Edge) */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -49,4 +58,8 @@ h1, h2, h3, h4, .fantasy-font {
 ::-webkit-scrollbar-thumb {
   background: var(--color-crimson);
   border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-crimson-light);
 }

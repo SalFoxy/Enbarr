@@ -1,10 +1,16 @@
 <nav class="navbar">
   <div class="logo">Enbarr</div>
-  <ul class="nav-links">
+
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <lucide-icon [name]="isMenuOpen ? CloseIcon : MenuIcon" [size]="28"></lucide-icon>
+  </button>
+
+  <ul class="nav-links" [class.open]="isMenuOpen">
     <li *ngFor="let item of navItems">
       <a [routerLink]="[item.route]" 
          routerLinkActive="active-link" 
-         [routerLinkActiveOptions]="{exact: true}">
+         [routerLinkActiveOptions]="{exact: true}"
+         (click)="closeMenu()">
         <lucide-icon [name]="item.icon" [size]="18" class="nav-icon"></lucide-icon>
         <span>{{ item.label }}</span>
       </a>

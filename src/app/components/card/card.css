@@ -1,6 +1,6 @@
 .card {
-  background: rgba(30, 30, 30, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(30, 30, 30, 0.6); /* Sfondo scuro semi-trasparente */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Bordo sottilissimo */
   border-radius: 12px;
   overflow: hidden;
   height: 100%;
@@ -10,12 +10,12 @@
   position: relative;
 }
 
-/* Effetto Hover: la card si alza e si illumina */
+/* Effetto Hover */
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px); /* Si alza */
   background: rgba(40, 40, 40, 0.8);
   border-color: var(--color-gold);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.1); /* Glow Oro */
 }
 
 .card-header {
@@ -51,7 +51,7 @@
   margin-bottom: 2rem;
 }
 
-/* Bottone moderno "Outline" */
+/* Bottone Outline Moderno */
 .card-body button {
   background: transparent;
   border: 1px solid var(--color-crimson);
@@ -64,10 +64,22 @@
   text-transform: uppercase;
   transition: all 0.3s ease;
   border-radius: 4px;
+  font-family: var(--font-heading);
 }
 
 .card-body button:hover {
   background: var(--color-crimson);
   color: #fff;
-  box-shadow: 0 0 15px var(--color-crimson); /* Glow rosso */
+  box-shadow: 0 0 15px var(--color-crimson);
+}
+
+/* Responsive Extra Small */
+@media (max-width: 480px) {
+  .card-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .card-body {
+    padding: 1.2rem;
+  }
 }
