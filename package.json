@@ -33,6 +33,7 @@
     "aos": "^2.3.4",
     "lucide-angular": "^0.556.0",
     "rxjs": "~7.8.0",
+    "skinview3d": "^3.4.1",
     "swiper": "^12.0.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

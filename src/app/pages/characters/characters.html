@@ -1,0 +1,38 @@
+
+<section class="characters-section">
+  <div class="header" data-aos="fade-down">
+    <h1>I Volti di <span>Enbarr</span></h1>
+    <p>La gerarchia del potere</p>
+  </div>
+
+  <div class="pyramid-container">
+    
+    <div class="level-row" *ngFor="let level of characterLevels; let i = index" 
+         [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 200">
+      
+      <h3 class="level-title">{{ level.levelName }}</h3>
+
+      <div class="characters-group">
+        <div class="character-card" *ngFor="let char of level.characters">
+          
+          <div class="skin-box">
+            <app-skin-viewer 
+              [skinUrl]="char.skinUrl" 
+              [width]="160" 
+              [height]="280">
+            </app-skin-viewer>
+          </div>
+
+          <div class="char-info">
+            <h4>{{ char.name }}</h4>
+            <span class="role">{{ char.role }}</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="connector-line" *ngIf="i < characterLevels.length - 1"></div>
+    </div>
+
+  </div>
+</section>
