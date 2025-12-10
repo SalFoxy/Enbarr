@@ -1,0 +1,9 @@
+<nav class="navbar">
+  <a class="navbar-brand" [routerLink]="['/']">Enbarr</a>
+  
+  <ul class="nav-list">
+    <li *ngFor="let item of navItems" class="nav-item">
+      <a class="nav-link" [routerLink]="[item.route]">{{ item.label }}</a>
+    </li>
+  </ul>
+</nav>

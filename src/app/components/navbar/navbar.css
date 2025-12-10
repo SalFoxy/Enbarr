@@ -1,0 +1,39 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: var(--color-text-dark); /* Sfondo Nero */
+  color: var(--color-background-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-heading); /* Rosso Sporco */
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-item {
+  /* Nessuno stile particolare qui */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-background-light); /* Link Bianco */
+  font-weight: 500;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--color-detail); /* Oro al passaggio del mouse */
+  border-bottom: 2px solid var(--color-detail);
+}

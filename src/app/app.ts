@@ -1,12 +1,16 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+// Importa il Navbar Component standalone
+import { NavbarComponent } from './components/navbar/navbar'; 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  // Dichiara il NavbarComponent qui per usarlo nel template
+  imports: [RouterOutlet, NavbarComponent], 
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
-export class App {
-  protected readonly title = signal('enbarr');
+export class AppComponent {
+  title = 'enbarr';
 }
