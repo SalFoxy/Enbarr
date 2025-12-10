@@ -1,0 +1,56 @@
+.card {
+  background-color: #fff;
+  border: 1px solid var(--color-black);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px var(--color-gold);
+  border-color: var(--color-crimson);
+}
+
+.card-header {
+  background-color: var(--color-crimson);
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.card-header h3 {
+  color: var(--color-gold);
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+.card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-body button {
+  background: transparent;
+  border: 2px solid var(--color-crimson);
+  color: var(--color-crimson);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  font-weight: bold;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.card-body button:hover {
+  background-color: var(--color-crimson);
+  color: var(--color-white);
+}

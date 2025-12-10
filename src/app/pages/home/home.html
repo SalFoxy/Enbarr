@@ -1,1 +1,19 @@
-<p>home works!</p>
+<header class="hero">
+  <div class="overlay">
+    <div class="hero-text">
+      <h1>Benvenuti a Enbarr</h1>
+      <p>Città di Sangue e Oro</p>
+    </div>
+  </div>
+</header>
+
+<section class="container">
+  <h2 class="section-title">Cronache della Città</h2>
+  <div class="grid">
+    <app-card 
+      *ngFor="let card of loreCards" 
+      [title]="card.title" 
+      [description]="card.description">
+    </app-card>
+  </div>
+</section>

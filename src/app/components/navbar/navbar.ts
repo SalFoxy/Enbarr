@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { RouterLink } from '@angular/router'; // Aggiungiamo RouterLink
+import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink], // Aggiornato con i moduli di routing
-  
-  // 🎯 CORREZIONE: Qui usiamo i nomi dei file SENZA .component
-  templateUrl: './navbar.html', 
-  styleUrls: ['./navbar.css']
+  imports: [CommonModule, RouterLink, RouterLinkActive],
+  templateUrl: './navbar.html', // Controlla se il file generato si chiama navbar.html o navbar.component.html
+  styleUrl: './navbar.css'      // Idem per il css
 })
 export class NavbarComponent {
   navItems = [

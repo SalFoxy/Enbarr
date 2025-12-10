@@ -1,16 +1,11 @@
-/* Importazione Font: Cinzel (Fantasy) e Lato (Testo) */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap');
-
+/* Palette Enbarr */
 :root {
-  /* --- PALETTE ENBARR --- */
-  /* Rosso Sporco / Sangue rappreso */
-  --color-primary-dark: #7a1f1f; 
-  /* Oro Antico */
-  --color-gold: #c5a059; 
-  /* Nero Profondo */
-  --color-black: #1a1a1a; 
-  /* Bianco Sporco / Pergamena */
-  --color-white: #fdfbf7; 
+  /* Colori */
+  --color-crimson: #7a1f1f; /* Rosso sangue rappreso */
+  --color-gold: #c5a059;    /* Oro antico */
+  --color-black: #1a1a1a;   /* Nero profondo */
+  --color-white: #fdfbf7;   /* Pergamena chiara */
+  --color-dark-gray: #2c2c2c;
 
   /* Font */
   --font-heading: 'Cinzel', serif;

@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core'; // signal lo lasciamo anche se non lo usiamo subito
 import { RouterOutlet } from '@angular/router';
-// Importa il Navbar Component standalone
-import { NavbarComponent } from './components/navbar/navbar'; 
+import { NavbarComponent } from './components/navbar/navbar'; // Verifica percorso
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // Dichiara il NavbarComponent qui per usarlo nel template
-  imports: [RouterOutlet, NavbarComponent], 
+  imports: [RouterOutlet, NavbarComponent], // Aggiungi NavbarComponent
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrl: './app.css'
 })
-export class AppComponent {
-  title = 'enbarr';
+export class App {
+  // Possiamo rimuovere il signal 'title' se non serve più, o lasciarlo
+  protected readonly title = signal('enbarr'); 
 }

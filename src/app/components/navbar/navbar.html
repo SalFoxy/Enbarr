@@ -1,9 +1,10 @@
 <nav class="navbar">
-  <a class="navbar-brand" [routerLink]="['/']">Enbarr</a>
-  
-  <ul class="nav-list">
-    <li *ngFor="let item of navItems" class="nav-item">
-      <a class="nav-link" [routerLink]="[item.route]">{{ item.label }}</a>
+  <div class="logo">Enbarr</div>
+  <ul class="nav-links">
+    <li *ngFor="let item of navItems">
+      <a [routerLink]="[item.route]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        {{ item.label }}
+      </a>
     </li>
   </ul>
 </nav>

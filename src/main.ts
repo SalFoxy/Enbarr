@@ -1,7 +1,10 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-// 🎯 CORREZIONE: Importa AppComponent dal percorso corretto
-import { AppComponent } from './app/app';
 import { appConfig } from './app/app.config';
+// CORREZIONE: La classe si chiama 'App', non 'AppComponent'
+import { App } from './app/app'; 
 
-bootstrapApplication(AppComponent, appConfig)
+bootstrapApplication(App, appConfig)
+  .catch((err) => console.error(err));
+
+bootstrapApplication(App, appConfig)
   .catch((err) => console.error(err));

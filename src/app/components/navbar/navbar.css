@@ -1,39 +1,45 @@
 .navbar {
+  background-color: var(--color-black);
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem;
-  background-color: var(--color-text-dark); /* Sfondo Nero */
-  color: var(--color-background-light);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-bottom: 3px solid var(--color-gold);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
-.navbar-brand {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--color-heading); /* Rosso Sporco */
-  text-decoration: none;
+.logo {
+  font-family: var(--font-heading);
+  color: var(--color-crimson);
+  font-size: 2rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0px var(--color-gold);
 }
 
-.nav-list {
+.nav-links {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 25px;
 }
 
-.nav-item {
-  /* Nessuno stile particolare qui */
-}
-
-.nav-link {
+.nav-links a {
   text-decoration: none;
-  color: var(--color-background-light); /* Link Bianco */
-  font-weight: 500;
-  transition: color 0.3s, border-bottom 0.3s;
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  transition: color 0.3s;
 }
 
-.nav-link:hover {
-  color: var(--color-detail); /* Oro al passaggio del mouse */
-  border-bottom: 2px solid var(--color-detail);
+.nav-links a:hover {
+  color: var(--color-gold);
+}
+
+.active-link {
+  color: var(--color-gold) !important;
+  border-bottom: 2px solid var(--color-crimson);
 }
