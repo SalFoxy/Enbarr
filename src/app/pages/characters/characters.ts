@@ -46,7 +46,7 @@ export class CharactersComponent {
         { name: 'SalFox_', role: 'Ministro IT', skinUrl: 'https://minotar.net/skin/SalFox_' },
         { name: 'EroLiSonoQui', role: 'Sindaco di Moszna', skinUrl: 'https://minotar.net/skin/EroLiSonoQui' },
         { name: 'Dqrwinn', role: 'Generale dell\'Esercito', skinUrl: 'https://minotar.net/skin/Dqrwinn' },
-        { name: 'Shadow_Leoh', role: 'Ministro delle Finanze', skinUrl: 'https://minotar.net/skin/Shadow_Leoh' },
+        { name: 'ShadowLeoh', role: 'Ministro delle Finanze', skinUrl: 'https://minotar.net/skin/ShadowLeoh' },
       ]
     },
     {
