@@ -1,0 +1,142 @@
+.social-widget-container {
+  position: fixed;
+  top: 120px; 
+  left: 20px; /* SPOSTATO A SINISTRA */
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse; 
+  align-items: flex-start; /* ALLINEAMENTO A SINISTRA */
+  gap: 15px;
+}
+
+/* Bottone Principale - RIDOTTO */
+.main-trigger {
+  width: 50px;  /* Da 60px a 50px */
+  height: 50px; /* Da 60px a 50px */
+  border-radius: 50%;
+  background: var(--color-crimson, #dc143c);
+  border: 2px solid var(--color-gold, #d4af37);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0; 
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s, background 0.3s;
+  outline: none;
+  padding: 0;
+}
+
+.main-trigger:hover {
+  transform: scale(1.1);
+  background: #a00f2b;
+}
+
+.social-widget-container:not(.open) .main-trigger {
+  animation: pulse-gold 3s infinite;
+}
+
+/* Icona + che ruota */
+.icon-rotator {
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  display: flex;
+}
+
+/* Quando aperto, ruota di 45 gradi */
+.social-widget-container.open .main-trigger .icon-rotator {
+  transform: rotate(45deg);
+}
+
+/* Lista dei Link */
+.social-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Gap leggermente ridotto */
+  align-items: flex-start; /* ALLINEAMENTO A SINISTRA */
+  pointer-events: none;
+}
+
+.social-widget-container.open .social-links-list {
+  pointer-events: all;
+}
+
+/* Singolo Item */
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(-20px) scale(0.8);
+  transition: all 0.3s ease;
+  
+  /* IMPORTANTE: Inverte l'ordine visivo (Icona a sinistra, Label a destra) */
+  flex-direction: row-reverse; 
+}
+
+.label {
+  background: rgba(10, 10, 10, 0.9);
+  color: var(--color-gold, #d4af37);
+  padding: 4px 10px; /* Padding leggermente ridotto */
+  border-radius: 4px;
+  font-size: 0.8rem; /* Font leggermente più piccolo */
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  white-space: nowrap;
+}
+
+/* ICONE PICCOLE - RIDOTTE */
+.icon-bubble {
+  width: 35px;  /* Da 45px a 35px */
+  height: 35px; /* Da 45px a 35px */
+  border-radius: 50%;
+  background: #222;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  font-size: 0.9rem; /* Se usi icone font, riduciamo un po' la dimensione */
+}
+
+.social-item:hover .icon-bubble {
+  background: var(--hover-color);
+  border-color: var(--hover-color);
+  transform: scale(1.1);
+}
+
+.social-item:hover .label {
+  background: var(--hover-color);
+  color: white;
+}
+
+/* Animazioni apertura */
+.social-widget-container.open .social-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.social-widget-container.open .social-item:nth-child(1) { transition-delay: 0.05s; }
+.social-widget-container.open .social-item:nth-child(2) { transition-delay: 0.1s; }
+.social-widget-container.open .social-item:nth-child(3) { transition-delay: 0.15s; }
+.social-widget-container.open .social-item:nth-child(4) { transition-delay: 0.2s; }
+.social-widget-container.open .social-item:nth-child(5) { transition-delay: 0.25s; }
+
+@keyframes pulse-gold {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); } /* Ridotto raggio pulse */
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+.icon-bubble img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Taglia l'immagine per riempire il cerchio */
+  border-radius: 50%;
+  display: block;
+}

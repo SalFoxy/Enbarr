@@ -1,0 +1,25 @@
+<div class="social-widget-container" [class.open]="isOpen">
+  
+  <div class="social-links-list">
+    <a *ngFor="let link of socialLinks" 
+       [href]="link.url" 
+       target="_blank" 
+       class="social-item"
+       [style.--hover-color]="link.color">
+       
+      <span class="label">{{ link.label }}</span>
+      
+      <div class="icon-bubble">
+        <img [src]="link.img" [alt]="link.label">
+      </div>
+      
+    </a>
+  </div>
+
+  <button class="main-trigger" (click)="toggleWidget()">
+    <div class="icon-rotator">
+      <lucide-icon [name]="TriggerIcon" [size]="24"></lucide-icon>
+    </div>
+  </button>
+
+</div>

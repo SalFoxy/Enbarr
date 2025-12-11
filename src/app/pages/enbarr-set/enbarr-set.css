@@ -1,3 +1,13 @@
+:host {
+  /* Assicuriamo che le variabili siano disponibili nel componente se non globali */
+  --color-text: #e0e0e0;
+  --color-crimson: #dc143c;
+  --color-gold: #d4af37;
+  --color-white: #ffffff;
+  --font-heading: 'Cinzel', serif; /* Esempio, se usi font custom */
+  --font-body: sans-serif;
+}
+
 .newsroom {
   padding: 8rem 2rem 6rem;
   min-height: 100vh;
@@ -304,10 +314,17 @@
   width: fit-content;
 }
 
+/* --- GRIGLIA SPECIALE: IL FIX È QUI --- */
 .specials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  
+  /* [FIX IMPORTANTE] 
+     Questo impedisce agli elementi di allungarsi (stretch) per copiare l'altezza
+     del vicino che si apre. Ognuno mantiene la sua altezza naturale. 
+  */
+  align-items: start;
 }
 
 /* Card Speciale (Stile "Cinematografico") */
@@ -361,6 +378,7 @@
   opacity: 0;
   transition: opacity 0.3s;
   gap: 10px;
+  z-index: 10;
 }
 
 .special-overlay span {
@@ -389,4 +407,122 @@
   font-size: 0.9rem;
   margin: 0;
   line-height: 1.4;
+}
+
+.group-card {
+  border: 1px solid rgba(212, 175, 55, 0.5); /* Bordo oro più forte per i gruppi */
+  position: relative;
+}
+
+/* Badge sopra la thumbnail del gruppo */
+.group-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 10, 0.7); /* Più scuro */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  gap: 5px;
+  /* Non scompare all'hover, resta fisso per indicare che è una raccolta */
+  z-index: 5;
+}
+
+.group-overlay span {
+  font-weight: bold;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+/* Header del gruppo (parte cliccabile) */
+.group-header {
+  cursor: pointer;
+}
+
+.group-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-icon {
+  color: var(--color-gold);
+  transition: transform 0.3s;
+}
+
+.group-card:hover .toggle-icon {
+  transform: translateY(3px);
+}
+
+/* Contenuto espanso (Lista video interna) */
+.group-content {
+  background: rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Singolo video nella lista interna */
+.sub-video-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sub-video-item:hover {
+  background: rgba(212, 175, 55, 0.15);
+}
+
+.sub-thumb {
+  width: 60px;
+  height: 34px;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sub-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  opacity: 0.8;
+}
+
+.sub-info h5 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-white);
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.sub-info span {
+  font-size: 0.7rem;
+  color: #888;
+}
+
+/* Quando il gruppo è espanso */
+.group-card.expanded {
+  background: rgba(30, 30, 30, 0.9);
 }
