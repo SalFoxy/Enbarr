@@ -41,7 +41,7 @@ export class SkinViewerComponent implements AfterViewInit, OnDestroy, OnChanges 
         width: initialWidth,  
         height: initialHeight,
         skin: this.skinUrl,
-        zoom: 0.85
+        zoom: 0.85,
       });
 
       this.viewer.camera.position.x = 0;

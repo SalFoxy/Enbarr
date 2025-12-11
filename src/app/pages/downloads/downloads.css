@@ -1,208 +1,288 @@
-/* src/app/pages/downloads/downloads.css */
+/* Variabili locali per facilitare le modifiche */
+:host {
+  --card-bg: rgba(20, 20, 20, 0.6);
+  --card-border: 1px solid rgba(255, 255, 255, 0.08);
+  --primary-glow: rgba(220, 20, 60, 0.4); /* Crimson */
+  --secondary-glow: rgba(212, 175, 55, 0.3); /* Gold */
+}
 
 .downloads-page {
-  /* Padding ridotto: meno spazio sopra e ai lati */
-  padding: 6rem 1.5rem 3rem; 
+  padding: 8rem 1.5rem 4rem;
   min-height: 100vh;
-  background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+  background-color: #050505;
+  position: relative;
+  overflow: hidden; /* Per contenere i glow */
   font-family: var(--font-body);
 }
 
-/* --- HEADER PIÙ COMPATTO --- */
+/* --- SFONDO AMBIENTALE --- */
+.ambient-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+  animation: float 15s infinite ease-in-out;
+}
+
+.ambient-glow.crimson {
+  top: -100px;
+  left: -100px;
+  background: var(--color-crimson);
+}
+
+.ambient-glow.gold {
+  bottom: -100px;
+  right: -100px;
+  background: var(--color-gold);
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(50px, 30px); }
+}
+
+/* --- HEADER --- */
 .page-header {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  margin-bottom: 3rem; /* Ridotto da 5rem */
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
 }
 
 .page-header h1 {
-  font-size: 2.5rem; /* Ridotto da 3.5rem */
-  color: var(--color-text);
-  margin-bottom: 0.3rem;
+  font-size: 4rem;
+  line-height: 1;
+  margin: 0;
+  color: #fff;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: -1px;
 }
 
 .page-header h1 span {
-  color: var(--color-gold);
-  text-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+  font-style: italic;
+  font-family: var(--font-heading);
+  background: linear-gradient(to right, var(--color-gold), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .page-header p {
   color: #888;
-  font-size: 0.95rem; /* Ridotto da 1.1rem */
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-top: 0;
+  font-size: 1.1rem;
+  max-width: 500px;
 }
 
-/* --- LAYOUT SEZIONI --- */
+/* --- SEZIONI --- */
 .main-content {
-  max-width: 1200px; /* Contenitore leggermente più stretto per eleganza */
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 3.5rem; /* Ridotto lo spazio tra le sezioni */
+  gap: 6rem;
 }
 
-.section-title {
-  color: var(--color-gold);
-  font-size: 1.4rem; /* Ridotto da 2rem */
-  margin-bottom: 1.5rem;
+.section-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-heading);
-  text-transform: uppercase;
-  
-  /* Linea decorativa più sottile */
-  border-left: 3px solid var(--color-crimson);
-  padding-left: 12px;
-  background: linear-gradient(90deg, rgba(220, 20, 60, 0.08), transparent);
-  height: 2.5rem; /* Altezza fissa per allineamento */
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-/* --- GRIGLIA COMPATTA --- */
-.downloads-grid {
-  display: grid;
-  /* Minimo 260px invece di 320px -> Card più strette */
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-  gap: 1.5rem; /* Gap ridotto tra le card */
-}
-
-/* --- CARD STYLE --- */
-.download-card {
-  background: rgba(30, 30, 30, 0.5); /* Più trasparente */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px; /* Bordi meno arrotondati */
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.download-card:hover {
-  transform: translateY(-5px); /* Movimento più sottile */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-  border-color: rgba(212, 175, 55, 0.4);
-}
-
-/* Immagine Card - Altezza ridotta */
-.card-image {
-  height: 140px; /* Ridotto da 180px */
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.download-card:hover .card-image img {
-  transform: scale(1.08);
-}
-
-/* Contenuto Card */
-.card-content {
-  padding: 1.2rem; /* Padding ridotto da 1.5rem */
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.card-header h3 {
-  margin: 0 0 0.5rem 0;
-  color: var(--color-text);
-  font-family: var(--font-heading);
-  font-size: 1.1rem; /* Ridotto da 1.3rem */
-  line-height: 1.3;
-}
-
-.meta-tags {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 0.8rem;
-}
-
-.tag {
-  font-size: 0.7rem; /* Font piccolissimo per i tag */
-  padding: 2px 6px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.03);
-  color: #999;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.tag.version {
-  color: var(--color-gold);
-  border-color: rgba(212, 175, 55, 0.2);
-}
-
-.description {
-  font-size: 0.85rem; /* Ridotto da 0.95rem */
-  color: #aaa;
-  line-height: 1.5;
-  margin-bottom: 1.2rem;
-  flex-grow: 1;
-  
-  /* Opzionale: limita a 3 righe con ellissi (...) */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Bottone Download */
-.download-btn {
+.icon-box {
+  width: 45px;
+  height: 45px;
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 100%;
-  padding: 8px; /* Padding ridotto */
-  background: transparent;
-  color: var(--color-text);
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: 4px;
+  color: var(--color-gold);
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.line-decorator {
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+}
+
+/* --- GRIGLIA & CARD --- */
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.download-card {
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+}
+
+.download-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+}
+
+/* Media Area (Immagine + Overlay) */
+.card-media {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.download-card:hover .card-media img {
+  transform: scale(1.1);
+}
+
+.badge-new {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--color-crimson);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.media-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  display: flex;
+  gap: 8px;
+}
+
+.tech-pill {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Body */
+.card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-body h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 0 0.5rem;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Bottone Moderno */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
-  border: 1px solid var(--color-crimson);
   margin-top: auto;
 }
 
-.download-btn:hover {
-  background: var(--color-crimson);
-  color: white;
-  box-shadow: 0 0 15px rgba(220, 20, 60, 0.25);
+.action-btn:hover {
+  background: var(--color-gold);
+  color: #000; /* Testo scuro su oro per contrasto */
+  border-color: var(--color-gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
-/* Icona dentro il bottone */
-.download-btn lucide-icon {
-  width: 14px;
-  height: 14px;
+.action-btn lucide-icon {
+  transition: transform 0.3s;
 }
 
-/* Responsive */
+.action-btn:hover lucide-icon {
+  transform: translateY(3px);
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .page-header h1 {
-    font-size: 2rem;
-  }
-  
-  .section-title {
-    font-size: 1.2rem;
-  }
-  
-  .downloads-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Ancora più stretto su mobile */
-  }
+  .page-header h1 { font-size: 2.8rem; }
+  .downloads-grid { grid-template-columns: 1fr; }
+  .section-header h2 { font-size: 1.4rem; }
 }

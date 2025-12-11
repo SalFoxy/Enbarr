@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Download, Box, Layers, FileDigit, HardDrive } from 'lucide-angular';
+import { LucideAngularModule, Download, Box, Layers, FileDigit, HardDrive, Sparkles, MonitorPlay } from 'lucide-angular';
 
 interface DownloadItem {
   title: string;
@@ -10,6 +10,7 @@ interface DownloadItem {
   description: string;
   image: string;
   downloadUrl: string;
+  isNew?: boolean; // Aggiunto flag per badge "New"
 }
 
 @Component({
@@ -26,39 +27,58 @@ export class DownloadsComponent {
   readonly TextureIcon = Layers;
   readonly FileIcon = FileDigit;
   readonly SizeIcon = HardDrive;
+  readonly NewIcon = Sparkles;
 
+  // Dati
   downloads: DownloadItem[] = [
     {
-      title: 'InkubakMadness - World',
+      title: 'Kingdom of Enbarr',
       category: 'World',
       version: '1.20.4',
       size: '125 MB',
-      description: 'Esplora la capitale imperiale. Include il palazzo reale, i bassifondi e l\'arena.',
-      image: '/img/enbarr-home.png',
-      downloadUrl: '#'
+      description: 'La capitale imperiale completa. Palazzo reale, catacombe e arena.',
+      image: 'assets/img/enbarr-home.png',
+      downloadUrl: '#',
+      isNew: true
     },
     {
-      title: 'Ronfo Pack',
+      title: 'Enbarr PvP Pack',
       category: 'Texture',
       version: '1.8 - 1.20',
       size: '15 MB',
-      description: 'Texture pack ottimizzata per il combattimento. Spade corte, cieli custom e UI dorata.',
-      image: '/img/enbarr-home2.png',
+      description: 'Spade corte, cieli custom, minerali evidenziati. FPS Friendly.',
+      image: 'assets/img/enbarr-home2.png',
       downloadUrl: '#'
     },
     {
-      title: 'Gay Pack',
+      title: 'Adrestian Skin Pack',
       category: 'Other',
       version: 'Universal',
       size: '2 MB',
-      description: 'Pacchetto ufficiale delle skin dei generali e dei cittadini di Enbarr.',
-      image: '/img/adrestia-icon.jpg',
+      description: 'Le skin ufficiali dei generali e dei cittadini.',
+      image: 'assets/img/adrestia-icon.jpg',
+      downloadUrl: '#'
+    },
+    {
+      title: 'Enbarr OST',
+      category: 'Other',
+      version: 'MP3 / FLAC',
+      size: '450 MB',
+      description: 'Colonna sonora originale completa.',
+      image: 'assets/img/enbarr-home2.png', // Placeholder
       downloadUrl: '#'
     }
   ];
 
-  // Funzione per ottenere gli elementi di una specifica categoria
-  getSection(cat: 'World' | 'Texture' | 'Other') {
+  // Helper per le categorie da mostrare nel template
+  categories = [
+    { id: 'World', label: 'Mondi & Mappe', icon: this.WorldIcon },
+    { id: 'Texture', label: 'Texture Packs', icon: this.TextureIcon },
+    { id: 'Other', label: 'Extra & Risorse', icon: this.FileIcon }
+  ];
+
+  // Filtra la lista
+  getByCategory(cat: string) {
     return this.downloads.filter(item => item.category === cat);
   }
 }

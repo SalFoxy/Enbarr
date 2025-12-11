@@ -1,67 +1,67 @@
 <section class="downloads-page">
   
-  <div class="page-header" data-aos="fade-down">
-    <div class="header-content">
-      <h1>Archivi <span>Reali</span></h1>
-      <p>Risorse ufficiali</p>
+  <div class="ambient-glow crimson"></div>
+  <div class="ambient-glow gold"></div>
+
+  <div class="page-header" data-aos="fade-down" data-aos-duration="1000">
+    <div class="header-badge">
+      <lucide-icon [name]="NewIcon" [size]="14"></lucide-icon> OFFICIAL REPOSITORY
     </div>
+    <h1>Archivi <span>Reali</span></h1>
+    <p>Il tesoro digitale dell'Impero</p>
   </div>
 
   <div class="main-content">
 
-    <div class="category-block" *ngIf="getSection('World').length > 0" data-aos="fade-up">
-      <h2 class="section-title">
-        <lucide-icon [name]="WorldIcon" [size]="28"></lucide-icon> Mondi & Mappe
-      </h2>
-      <div class="downloads-grid">
-        <ng-container *ngTemplateOutlet="cardTemplate; context:{list: getSection('World')}"></ng-container>
-      </div>
-    </div>
+    <ng-container *ngFor="let cat of categories">
+      
+      <div class="category-section" *ngIf="getByCategory(cat.id).length > 0" data-aos="fade-up">
+        
+        <div class="section-header">
+          <div class="icon-box">
+            <lucide-icon [name]="cat.icon" [size]="24"></lucide-icon>
+          </div>
+          <h2>{{ cat.label }}</h2>
+          <div class="line-decorator"></div>
+        </div>
 
-    <div class="category-block" *ngIf="getSection('Texture').length > 0" data-aos="fade-up">
-      <h2 class="section-title">
-        <lucide-icon [name]="TextureIcon" [size]="28"></lucide-icon> Texture Packs
-      </h2>
-      <div class="downloads-grid">
-        <ng-container *ngTemplateOutlet="cardTemplate; context:{list: getSection('Texture')}"></ng-container>
-      </div>
-    </div>
+        <div class="downloads-grid">
+          
+          <div class="download-card" *ngFor="let item of getByCategory(cat.id)">
+            
+            <div class="card-media">
+              <img [src]="item.image" [alt]="item.title">
+              
+              <div class="badge-new" *ngIf="item.isNew">
+                <lucide-icon [name]="NewIcon" [size]="12"></lucide-icon> NEW
+              </div>
 
-    <div class="category-block" *ngIf="getSection('Other').length > 0" data-aos="fade-up">
-      <h2 class="section-title">
-        <lucide-icon [name]="FileIcon" [size]="28"></lucide-icon> Altro
-      </h2>
-      <div class="downloads-grid">
-        <ng-container *ngTemplateOutlet="cardTemplate; context:{list: getSection('Other')}"></ng-container>
+              <div class="media-overlay">
+                <span class="tech-pill">
+                  {{ item.version }}
+                </span>
+                <span class="tech-pill">
+                  <lucide-icon [name]="SizeIcon" [size]="12"></lucide-icon> {{ item.size }}
+                </span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.description }}</p>
+              
+              <a [href]="item.downloadUrl" target="_blank" class="action-btn">
+                <span>Download</span>
+                <lucide-icon [name]="DownloadIcon" [size]="18"></lucide-icon>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
       </div>
-    </div>
+
+    </ng-container>
 
   </div>
-
-  <ng-template #cardTemplate let-list="list">
-    <div class="download-card" *ngFor="let item of list">
-      
-      <div class="card-image">
-        <img [src]="item.image" [alt]="item.title">
-      </div>
-
-      <div class="card-content">
-        <div class="card-header">
-          <h3>{{ item.title }}</h3>
-          <div class="meta-tags">
-            <span class="tag version">{{ item.version }}</span>
-            <span class="tag size"><lucide-icon [name]="SizeIcon" [size]="12"></lucide-icon> {{ item.size }}</span>
-          </div>
-        </div>
-        
-        <p class="description">{{ item.description }}</p>
-
-        <a [href]="item.downloadUrl" target="_blank" class="download-btn">
-          <lucide-icon [name]="DownloadIcon" [size]="18"></lucide-icon>
-          SCARICA
-        </a>
-      </div>
-    </div>
-  </ng-template>
-
 </section>
