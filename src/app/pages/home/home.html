@@ -1,19 +1,32 @@
 <header class="hero">
+  <div class="hero-carousel">
+    @for (img of heroImages; track img; let i = $index) {
+    <div class="carousel-slide" [style.background-image]="'url(' + img + ')'" [class.active]="i === currentSlide()">
+    </div>
+    }
+  </div>
+  <ngx-particles [id]="'tsparticles'" [options]="particlesOptions" class="particles-bg"></ngx-particles>
   <div class="overlay"></div>
-  <div class="hero-text" data-aos="zoom-in" data-aos-duration="1500">
-    <h1>Benvenuti a <span>Enbarr</span></h1>
-    <p data-aos="fade-up" data-aos-delay="400">Città di Sangue e Oro</p>
+  <div class="hero-content">
+    <div class="hero-text" data-aos="zoom-in" data-aos-duration="1500">
+      <h1 class="fantasy-font">Benvenuti a <span class="text-glow">Enbarr</span></h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">Città di Sangue e Oro</p>
+    </div>
+    <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="800">
+      <span>Esplora</span>
+      <div class="scroll-arrow"></div>
+    </div>
   </div>
 </header>
 
-<section class="container">
-  <h2 class="section-title" data-aos="zoom-in">Cronache della Città</h2>
+<section class="container relative z-10">
+  <div class="section-header" data-aos="fade-in">
+    <h2 class="section-title fantasy-font">Cronache della Città</h2>
+    <div class="title-separator"></div>
+  </div>
+
   <div class="grid">
-    <app-card 
-      *ngFor="let card of loreCards; let i = index"
-      [title]="card.title" 
-      [description]="card.description"
-      [attr.data-aos]="'fade-up'"
-      [attr.data-aos-delay]="i * 150"> </app-card>
+    <app-card *ngFor="let card of loreCards; let i = index" [title]="card.title" [description]="card.description"
+      [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 150"> </app-card>
   </div>
 </section>

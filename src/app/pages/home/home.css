@@ -1,125 +1,260 @@
 /* Hero Section */
 .hero {
-  background-image: url('/img/enbarr-home2.png');
-  background-size: cover;
-  background-position: center;
-  height: 75vh; /* Altezza leggermente ridotta */
+  /* Dynamic Background via Carousel */
+  background: #000;
+  height: 90vh;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-bottom: 3px solid var(--color-gold); /* Bordo più sottile */
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.hero-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, transform 8s ease;
+  transform: scale(1);
+  will-change: opacity, transform;
+}
+
+.carousel-slide.active {
+  opacity: 0.6;
+  /* Slight transparency to blend with black bg */
+  transform: scale(1.05);
+}
+
+.particles-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 .overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 60%, var(--color-black) 100%);
-  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 .hero-text {
-  position: relative;
-  z-index: 2;
-  text-align: center;
+  margin-bottom: 4rem;
   padding: 0 1rem;
 }
 
-/* Titolo Hero Molto Ridimensionato */
+/* Titolo Hero "WOW" */
 .hero-text h1 {
-  font-size: 3.5rem; /* Ridotto da 5rem */
+  font-size: 5rem;
   color: var(--color-text);
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  letter-spacing: 3px; /* Spaziatura ridotta */
-  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  margin-bottom: 1rem;
+  letter-spacing: 0.2em;
+  /* Spaziatura ampia */
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
 }
 
-.hero-text h1 span {
-  color: var(--color-crimson);
-  text-shadow: 0 0 20px rgba(138, 28, 28, 0.6);
+.hero-text h1 span.text-glow {
+  color: transparent;
+  background: linear-gradient(to bottom, var(--color-gold), #b8860b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+  font-weight: 800;
 }
 
-.hero-text p {
-  font-size: 1.1rem; /* Ridotto da 1.5rem */
-  color: var(--color-gold);
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--color-gold-light);
   font-weight: 300;
-  letter-spacing: 3px;
+  letter-spacing: 0.5em;
   text-transform: uppercase;
   margin-top: 0;
-  opacity: 0.9;
+  opacity: 0.8;
+  position: relative;
+  display: inline-block;
+}
+
+.subtitle::before,
+.subtitle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background: var(--color-crimson);
+  opacity: 0.7;
+}
+
+.subtitle::before {
+  left: -60px;
+}
+
+.subtitle::after {
+  right: -60px;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite;
+}
+
+.scroll-arrow {
+  width: 30px;
+  height: 30px;
+  border-right: 2px solid var(--color-gold);
+  border-bottom: 2px solid var(--color-gold);
+  transform: rotate(45deg);
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Container */
 .container {
-  max-width: 1200px; /* Max-width ridotta */
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 4rem 1.5rem; /* Padding ridotto */
+  padding: 6rem 2rem;
   position: relative;
-  z-index: 2;
 }
 
-/* Titolo Sezione */
-.section-title {
+.relative {
+  position: relative;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+/* Section Header */
+.section-header {
   text-align: center;
-  font-size: 2rem; /* Ridotto da 2.5rem */
-  margin-bottom: 3rem;
-  color: var(--color-gold);
-  position: relative;
-  display: block;
+  margin-bottom: 5rem;
 }
 
-.section-title::after {
-  content: '';
-  display: block;
-  width: 50px;
-  height: 2px; /* Linea più sottile */
-  background: var(--color-crimson);
-  margin: 12px auto 0;
-  box-shadow: 0 0 8px var(--color-crimson);
+.section-title {
+  font-size: 3rem;
+  color: var(--color-gold);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.title-separator {
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-crimson), transparent);
+  margin: 0 auto;
+  position: relative;
+}
+
+.title-separator::after {
+  content: '♦';
+  /* Rombo decorativo */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  background: var(--color-black);
+  padding: 0 10px;
 }
 
 /* Griglia */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Card più compatte */
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem;
 }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
   .hero {
-    height: 55vh;
+    height: 80vh;
   }
 
   .hero-text h1 {
-    font-size: 2.2rem; /* Molto più piccolo su mobile */
-    letter-spacing: 1px;
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
   }
 
-  .hero-text p {
-    font-size: 0.9rem;
-    letter-spacing: 2px;
+  .subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+  }
+
+  .subtitle::before,
+  .subtitle::after {
+    width: 20px;
+    left: -30px;
+    right: -30px;
   }
 
   .container {
-    padding: 2.5rem 1rem;
+    padding: 3rem 1.5rem;
   }
 
   .section-title {
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
+    font-size: 2rem;
   }
 
   .grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 }

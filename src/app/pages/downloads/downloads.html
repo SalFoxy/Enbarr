@@ -1,67 +1,96 @@
 <section class="downloads-page">
-  
+  <ngx-particles [id]="'tsparticles'" [options]="particlesOptions"
+    (particlesLoaded)="particlesLoaded($event)"></ngx-particles>
   <div class="ambient-glow crimson"></div>
   <div class="ambient-glow gold"></div>
 
-  <div class="page-header" data-aos="fade-down" data-aos-duration="1000">
+  <!-- Header -->
+  <header class="page-header" data-aos="fade-down" data-aos-duration="1000">
     <div class="header-badge">
-      <lucide-icon [name]="NewIcon" [size]="14"></lucide-icon> OFFICIAL REPOSITORY
+      <lucide-icon [name]="NewIcon" [size]="14"></lucide-icon> Imperial Archives
     </div>
-    <h1>Archivi <span>Reali</span></h1>
-    <p>Il tesoro digitale dell'Impero</p>
-  </div>
+    <h1 class="fantasy-font">Tesori dell'<span class="text-glow">Impero</span></h1>
+    <p class="subtitle">Risorse ufficiali per i cittadini di Enbarr</p>
+  </header>
 
   <div class="main-content">
 
-    <ng-container *ngFor="let cat of categories">
-      
-      <div class="category-section" *ngIf="getByCategory(cat.id).length > 0" data-aos="fade-up">
-        
-        <div class="section-header">
-          <div class="icon-box">
-            <lucide-icon [name]="cat.icon" [size]="24"></lucide-icon>
-          </div>
-          <h2>{{ cat.label }}</h2>
-          <div class="line-decorator"></div>
+    <!-- FEATURED HERO DOWNLOAD -->
+    <div class="featured-section" data-aos="zoom-in" data-aos-delay="200">
+      <div class="featured-card">
+        <div class="featured-image">
+          <img [src]="featuredDownload.image" [alt]="featuredDownload.title">
+          <div class="featured-overlay"></div>
         </div>
-
-        <div class="downloads-grid">
-          
-          <div class="download-card" *ngFor="let item of getByCategory(cat.id)">
-            
-            <div class="card-media">
-              <img [src]="item.image" [alt]="item.title">
-              
-              <div class="badge-new" *ngIf="item.isNew">
-                <lucide-icon [name]="NewIcon" [size]="12"></lucide-icon> NEW
-              </div>
-
-              <div class="media-overlay">
-                <span class="tech-pill">
-                  {{ item.version }}
-                </span>
-                <span class="tech-pill">
-                  <lucide-icon [name]="SizeIcon" [size]="12"></lucide-icon> {{ item.size }}
-                </span>
-              </div>
-            </div>
-
-            <div class="card-body">
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.description }}</p>
-              
-              <a [href]="item.downloadUrl" target="_blank" class="action-btn">
-                <span>Download</span>
-                <lucide-icon [name]="DownloadIcon" [size]="18"></lucide-icon>
-              </a>
-            </div>
-
+        <div class="featured-content">
+          <div class="featured-badge">
+            <lucide-icon [name]="StarIcon" [size]="16"></lucide-icon> Main Release
           </div>
-
+          <h2 class="fantasy-font">{{ featuredDownload.title }}</h2>
+          <div class="tech-specs">
+            <span class="pill"><lucide-icon [name]="NewIcon" [size]="14"></lucide-icon> {{ featuredDownload.version
+              }}</span>
+            <span class="pill"><lucide-icon [name]="SizeIcon" [size]="14"></lucide-icon> {{ featuredDownload.size
+              }}</span>
+          </div>
+          <p>{{ featuredDownload.description }}</p>
+          <a [href]="featuredDownload.downloadUrl" class="download-btn large">
+            <span class="btn-text">Scarica il Mondo</span>
+            <lucide-icon [name]="DownloadIcon" [size]="20"></lucide-icon>
+            <div class="btn-glow"></div>
+          </a>
         </div>
       </div>
+    </div>
 
-    </ng-container>
+    <!-- SEPARATOR -->
+    <div class="section-divider" data-aos="fade-up">
+      <span>Risorse Aggiuntive</span>
+      <div class="line"></div>
+    </div>
+
+    <!-- CATEGORY TABS -->
+    <div class="tabs-container" data-aos="fade-up">
+      <div class="tabs-scroll">
+        @for (cat of categories; track cat.id) {
+        <button class="tab-btn" [class.active]="selectedCategory() === cat.id" (click)="selectCategory(cat.id)">
+          <lucide-icon [name]="cat.icon" [size]="18"></lucide-icon>
+          <span>{{ cat.label }}</span>
+          @if (selectedCategory() === cat.id) {
+          <div class="tab-glow" layoutId="glow"></div>
+          }
+        </button>
+        }
+      </div>
+    </div>
+
+    <!-- RESOURCE GRID -->
+    <div class="resources-grid">
+      @for (item of filteredResources(); track item.title; let i = $index) {
+      <div class="resource-card" [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 150">
+        <div class="card-icon">
+          <lucide-icon [name]="getIconForCategory(item.category)" [size]="24"></lucide-icon>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h3>{{ item.title }}</h3>
+            @if (item.isNew) {
+            <span class="new-tag">New</span>
+            }
+          </div>
+          <p>{{ item.description }}</p>
+          <div class="card-meta">
+            <span>{{ item.version }}</span>
+            <span class="dot">•</span>
+            <span>{{ item.size }}</span>
+          </div>
+        </div>
+        <a [href]="item.downloadUrl" class="icon-btn" aria-label="Download">
+          <lucide-icon [name]="DownloadIcon" [size]="20"></lucide-icon>
+        </a>
+      </div>
+      }
+    </div>
 
   </div>
 </section>
