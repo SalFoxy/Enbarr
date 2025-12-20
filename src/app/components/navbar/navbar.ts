@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 // Aggiungi Menu e X alle importazioni
-import { LucideAngularModule, Home, Scroll, Sword, Users, Castle, Menu, X, Download} from 'lucide-angular';
+import { LucideAngularModule, Home, Scroll, Sword, Users, Castle, Menu, X, Download } from 'lucide-angular';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,8 @@ import { LucideAngularModule, Home, Scroll, Sword, Users, Castle, Menu, X, Downl
   styleUrl: './navbar.css'
 })
 export class NavbarComponent {
+  private uiService = inject(UiService);
+
   // Icone per il toggle del menu
   readonly MenuIcon = Menu;
   readonly CloseIcon = X;
@@ -24,8 +27,13 @@ export class NavbarComponent {
   readonly SetIcon = Castle;
   readonly DownloadIcon = Download;
 
-  // Stato del menu mobile
-  isMenuOpen = false;
+  // Stato del menu mobile delegato al service
+  // Usiamo il signal del service direttamente o ne facciamo un alias se serve nel template
+  // Per ora manteniamo la compatibilità con il template esistente usando un getter o aggiornando il template
+  // MA per semplicità, mappiamo isMenuOpen al signal del service
+  get isMenuOpen() {
+    return this.uiService.isMobileMenuOpen();
+  }
 
   navItems = [
     { label: 'Home', route: '/', icon: this.HomeIcon },
@@ -38,11 +46,11 @@ export class NavbarComponent {
 
   // Funzione per alternare il menu
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.uiService.toggleMobileMenu();
   }
 
   // Chiude il menu quando si clicca su un link
   closeMenu() {
-    this.isMenuOpen = false;
+    this.uiService.setMobileMenuOpen(false);
   }
 }

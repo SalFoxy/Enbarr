@@ -3,26 +3,30 @@
 .characters-section {
   padding: 8rem 2rem 6rem;
   min-height: 100vh;
-  /* Sfondo fisso evocativo */
-  background-image: url('https://images.unsplash.com/photo-1598556776374-25032049e346?q=80&w=1920&auto=format&fit=crop'); 
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
+  /* Sfondo più scuro per far risaltare le particelle */
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
   position: relative;
   overflow-x: hidden;
 }
 
-.characters-section::before {
-  content: '';
+/* PARTICLES */
+ngx-particles {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10, 10, 10, 0.85); /* Oscuramento sfondo */
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  /* Was 0, moving up slightly just in case, but keeping below content */
+  opacity: 0.6;
+  pointer-events: none;
+  /* Critical: click-through */
 }
 
-.header, .pyramid-container {
+.header,
+.content-wrapper {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* HEADER */
@@ -32,167 +36,295 @@
 }
 
 .header h1 {
-  font-size: 3.5rem;
+  font-size: 4rem;
   color: var(--color-text);
   margin-bottom: 0.5rem;
-  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+  font-family: var(--font-heading);
 }
 
 .header h1 span {
   color: var(--color-crimson);
+  text-shadow: 0 0 20px rgba(220, 20, 60, 0.4);
 }
 
 .header p {
   color: var(--color-gold);
-  font-size: 1.2rem;
-  letter-spacing: 3px;
+  font-size: 1.3rem;
+  letter-spacing: 4px;
   text-transform: uppercase;
 }
 
-/* --- PIRAMIDE STRUTTURA --- */
+/* --- HERO SECTION (IMPERATORE) --- */
+.hero-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+
+.emperor-card {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background: rgba(12, 12, 12, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 3rem 4rem;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.emperor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15);
+  border-color: var(--color-gold);
+}
+
+/* Glow dietro la hero */
+.glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-skin {
+  width: 200px;
+  /* Più grande */
+  height: 320px;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.hero-info {
+  text-align: left;
+  max-width: 400px;
+}
+
+.crown-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px var(--color-gold));
+}
+
+.hero-info h2 {
+  font-size: 2.5rem;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+}
+
+.hero-info .role {
+  display: inline-block;
+  background: var(--color-crimson);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  box-shadow: 0 5px 15px rgba(220, 20, 60, 0.4);
+}
+
+.hero-info .description {
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+
+/* --- SEPARATOR --- */
+.separator-line {
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+  margin: 0 auto 4rem;
+  position: relative;
+}
+
+.separator-line::after {
+  content: '♦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-gold);
+  background: #000;
+  padding: 5px;
+  font-size: 1.2rem;
+}
+
+
+/* --- PYRAMID & GRID --- */
 .pyramid-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4rem; /* Distanza verticale tra i livelli gerarchici */
+  gap: 5rem;
   width: 100%;
-  max-width: 1600px; /* Abbastanza largo per contenere molti soldati */
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .level-row {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
   position: relative;
 }
 
 .level-title {
-  color: rgba(212, 175, 55, 0.6);
-  font-size: 1rem;
+  color: var(--color-text);
+  font-size: 1.2rem;
   text-transform: uppercase;
-  letter-spacing: 4px;
-  margin-bottom: 2rem;
-  font-family: var(--font-body);
-  text-align: center;
+  letter-spacing: 3px;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.8;
 }
 
-/* --- GRUPPO CENTRATO CON GRIGLIA --- */
+.decoration-line {
+  width: 40px;
+  height: 1px;
+  background: var(--color-gold);
+  display: block;
+}
+
 .characters-group {
-  /* MODIFICA FONDAMENTALE: Usiamo Grid invece di Flex */
-  display: grid;
-  
-  /* Crea colonne fisse da 160px (larghezza della skin-box) che si adattano allo spazio */
-  /* 'auto-fit' crea il numero massimo di colonne possibile */
-  grid-template-columns: repeat(auto-fit, 160px);
-  
-  /* Centra l'intero blocco della griglia orizzontalmente nella pagina */
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  
-  /* Spazio tra le card (orizzontale e verticale) */
-  gap: 3rem; 
-  
+  gap: 2rem;
   width: 100%;
 }
 
-/* CARD PERSONAGGIO */
 .character-card {
+  width: 220px;
+  /* Larghezza fissa per la card */
+  perspective: 1000px;
+  position: relative;
+  z-index: 2;
+}
+
+.card-inner {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Bordo sottile */
+  border-radius: 12px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease;
-  position: relative;
-  z-index: 2; /* Sopra le linee di connessione */
-  /* La larghezza è implicita dal contenuto (skin-box = 160px), che matcha la colonna grid */
-}
-
-.character-card:hover {
-  transform: translateY(-10px);
-}
-
-/* BOX 3D (Skin) */
-.skin-box {
-  width: 160px;  
-  height: 260px; 
-  /* Sfondo radiale per dare profondità dietro la skin */
-  background: radial-gradient(circle at center, rgba(60, 60, 60, 0.4) 0%, rgba(30, 30, 30, 0.8) 100%);
-  border: 1px solid var(--color-gold);
-  border-radius: 12px;
+  transition: all 0.4s ease;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  margin-bottom: 1.2rem;
   position: relative;
-  border-bottom: 4px solid var(--color-crimson); /* Piedistallo */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-gold);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.character-card:hover .card-inner {
+  transform: translateY(-10px);
+  background: rgba(30, 30, 30, 0.9);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.character-card:hover .card-inner::before {
+  opacity: 1;
+}
+
+.skin-box {
+  width: 120px;
+  height: 200px;
+  background: radial-gradient(circle at center, rgba(60, 60, 60, 0.5), rgba(10, 10, 10, 0.8));
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+  position: relative;
+  transition: all 0.3s;
 }
 
 .character-card:hover .skin-box {
-  border-color: var(--color-crimson-light);
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  border-color: var(--color-gold);
 }
 
-/* INFO TESTO */
 .char-info {
   text-align: center;
-  width: 100%; /* Assicura che il testo usi tutto lo spazio della card */
+  width: 100%;
 }
 
 .char-info h4 {
-  color: var(--color-text);
-  font-size: 1.1rem; /* Leggermente ridotto per evitare wrap su nomi lunghi */
-  margin-bottom: 0.4rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-  white-space: nowrap; /* Evita che il nome vada a capo se possibile */
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .char-info .role {
-  display: inline-block;
+  font-size: 0.8rem;
   color: var(--color-gold);
-  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  background: rgba(212, 175, 55, 0.1);
-  padding: 0.3rem 0.8rem;
-  border-radius: 4px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  opacity: 0.8;
 }
 
-/* LINEA CONNETTORE (Albero Genealogico) */
+/* --- CONNECTOR LINES --- */
 .connector-line {
-  width: 2px;
-  height: 4rem; /* Copre il gap verticale */
-  background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(212, 175, 55, 0.1) 100%);
   position: absolute;
-  bottom: -4rem; 
+  bottom: -5rem;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0.4;
-  z-index: 0;
+  width: 1px;
+  height: 5rem;
+  background: linear-gradient(to bottom, var(--color-gold) 0%, transparent 100%);
+  opacity: 0.3;
+  z-index: 1;
 }
 
+
 /* --- RESPONSIVE --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .hero-section {
+    margin-bottom: 4rem;
+  }
+
+  .emperor-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  .hero-info {
+    text-align: center;
+  }
+
   .header h1 {
-    font-size: 2.5rem;
-  }
-  
-  .characters-group {
-    gap: 1.5rem; /* Gap ridotto su mobile */
-    /* Su mobile le colonne potrebbero restringersi sotto i 160px? 
-       No, auto-fit le farà andare a capo. */
-  }
-  
-  /* Opzionale: ridimensionare le card su schermi molto piccoli */
-  .skin-box {
-    width: 140px; 
-    height: 220px;
-  }
-  
-  /* Se riduciamo skin-box, dobbiamo aggiornare la griglia */
-  .characters-group {
-    grid-template-columns: repeat(auto-fit, 140px);
+    font-size: 2.8rem;
   }
 }

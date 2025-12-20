@@ -1,34 +1,72 @@
-
 <section class="characters-section">
+  <!-- Sfondo Particellare -->
+  <ngx-particles [id]="'tsparticles-characters'" [options]="particlesOptions"
+    (particlesLoaded)="particlesLoaded($event)"></ngx-particles>
+
   <div class="header" data-aos="fade-down">
     <h1>I Volti di <span>Enbarr</span></h1>
     <p>La gerarchia del potere</p>
   </div>
 
-  <div class="pyramid-container">
-    
-    <div class="level-row" *ngFor="let level of characterLevels; let i = index" 
-         [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 200">
-      
-      <h3 class="level-title">{{ level.levelName }}</h3>
+  <div class="content-wrapper">
 
-      <div class="characters-group">
-        <div class="character-card" *ngFor="let char of level.characters">
-          
-            <div class="skin-box">
-            <app-skin-viewer [skinUrl]="char.skinUrl"></app-skin-viewer>
-            </div>
-
-          <div class="char-info">
-            <h4>{{ char.name }}</h4>
-            <span class="role">{{ char.role }}</span>
-          </div>
-          
+    <!-- HERO SECTION (Imperatore) -->
+    <!-- Assumiamo che il primo livello sia sempre l'Imperatore -->
+    <div class="hero-section" *ngIf="characterLevels.length > 0" data-aos="zoom-in" data-aos-duration="1000">
+      <div class="emperor-card">
+        <div class="glow-effect"></div>
+        <div class="skin-box hero-skin">
+          <app-skin-viewer [skinUrl]="characterLevels[0].characters[0].skinUrl" [zoom]="1.1"
+            [offsetY]="15"></app-skin-viewer>
+        </div>
+        <div class="hero-info">
+          <div class="crown-icon">👑</div>
+          <h2>{{ characterLevels[0].characters[0].name }}</h2>
+          <span class="role">{{ characterLevels[0].characters[0].role }}</span>
+          <p class="description" *ngIf="characterLevels[0].characters[0].description">{{
+            characterLevels[0].characters[0].description }}</p>
         </div>
       </div>
-      
-      <div class="connector-line" *ngIf="i < characterLevels.length - 1"></div>
     </div>
 
+    <!-- Separatore Decorativo -->
+    <div class="separator-line" data-aos="fade-up"></div>
+
+    <!-- PIRAMIDE (Altri livelli) -->
+    <div class="pyramid-container">
+
+      <!-- Saltiamo il primo livello (index 0) perché è nella Hero -->
+      <ng-container *ngFor="let level of characterLevels; let i = index">
+        <div class="level-row" *ngIf="i > 0" [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 150">
+
+          <h3 class="level-title">
+            <span class="decoration-line"></span>
+            {{ level.levelName }}
+            <span class="decoration-line"></span>
+          </h3>
+
+          <div class="characters-group">
+            <div class="character-card" *ngFor="let char of level.characters">
+
+              <div class="card-inner">
+                <div class="skin-box">
+                  <app-skin-viewer [skinUrl]="char.skinUrl"></app-skin-viewer>
+                </div>
+
+                <div class="char-info">
+                  <h4>{{ char.name }}</h4>
+                  <span class="role">{{ char.role }}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Linea connettore tra livelli -->
+          <div class="connector-line" *ngIf="i < characterLevels.length - 1"></div>
+        </div>
+      </ng-container>
+
+    </div>
   </div>
 </section>

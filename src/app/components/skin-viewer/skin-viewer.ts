@@ -17,6 +17,8 @@ import * as skinview3d from 'skinview3d';
 })
 export class SkinViewerComponent implements AfterViewInit, OnDestroy, OnChanges {
   @Input() skinUrl!: string;
+  @Input() zoom: number = 0.85;
+  @Input() offsetY: number = 0;
 
   @ViewChild('skinContainer') skinContainer!: ElementRef<HTMLCanvasElement>;
 
@@ -31,24 +33,24 @@ export class SkinViewerComponent implements AfterViewInit, OnDestroy, OnChanges 
       const canvas = this.skinContainer.nativeElement;
       const container = canvas.parentElement;
 
+      // Ensure we get dimensions, falling back to canvas if container is null
+      // Note: skinview3d needs explicit dimensions or it might default to 300x300
       const rect = container ? container.getBoundingClientRect() : canvas.getBoundingClientRect();
-
-      const initialWidth =  rect.width ;
-      const initialHeight = rect.height ;
+      const initialWidth = rect.width;
+      const initialHeight = rect.height;
 
       this.viewer = new skinview3d.SkinViewer({
         canvas: canvas,
-        width: initialWidth,  
+        width: initialWidth,
         height: initialHeight,
         skin: this.skinUrl,
-        zoom: 0.85,
+        zoom: this.zoom,
       });
 
       this.viewer.camera.position.x = 0;
-      this.viewer.camera.position.y = 0;
+      this.viewer.camera.position.y = this.offsetY;
       this.viewer.camera.position.z = 60;
       this.viewer.playerObject.rotation.y = 0.5;
-
 
       this.animation = new skinview3d.WalkingAnimation();
       this.viewer.animation = this.animation;
@@ -58,7 +60,7 @@ export class SkinViewerComponent implements AfterViewInit, OnDestroy, OnChanges 
         for (const entry of entries) {
           if (this.viewer) {
             if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
-               this.viewer.setSize(entry.contentRect.width, entry.contentRect.height);
+              this.viewer.setSize(entry.contentRect.width, entry.contentRect.height);
             }
           }
         }
@@ -68,12 +70,20 @@ export class SkinViewerComponent implements AfterViewInit, OnDestroy, OnChanges 
         this.resizeObserver.observe(container);
       }
 
-    }, 1); 
+    }, 1);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['skinUrl'] && this.viewer && !changes['skinUrl'].firstChange) {
-      this.viewer.loadSkin(this.skinUrl);
+    if (this.viewer) {
+      if (changes['skinUrl'] && !changes['skinUrl'].firstChange) {
+        this.viewer.loadSkin(this.skinUrl);
+      }
+      if (changes['zoom'] && !changes['zoom'].firstChange) {
+        this.viewer.zoom = this.zoom;
+      }
+      if (changes['offsetY'] && !changes['offsetY'].firstChange) {
+        this.viewer.camera.position.y = this.offsetY;
+      }
     }
   }
 

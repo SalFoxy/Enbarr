@@ -1,18 +1,20 @@
 .social-widget-container {
   position: fixed;
-  top: 120px; 
-  left: 20px; /* SPOSTATO A SINISTRA */
+  top: 120px;
+  left: 20px;
+  /* SPOSTATO A SINISTRA */
   z-index: 9999;
   display: flex;
-  flex-direction: column-reverse; 
-  align-items: flex-start; /* ALLINEAMENTO A SINISTRA */
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  /* ALLINEAMENTO A SINISTRA */
   gap: 15px;
 }
 
 /* Bottone Principale - RIDOTTO */
 .main-trigger {
-  width: 50px;  
-  height: 50px; 
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: var(--color-crimson, #dc143c);
   border: 2px solid var(--color-gold, #d4af37);
@@ -20,9 +22,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 0; 
+  line-height: 0;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s, background 0.3s;
   outline: none;
   padding: 0;
@@ -52,8 +54,8 @@
 .social-links-list {
   display: flex;
   flex-direction: column;
-  gap: 10px; 
-  align-items: flex-start; 
+  gap: 10px;
+  align-items: flex-start;
   pointer-events: none;
 }
 
@@ -70,38 +72,38 @@
   opacity: 0;
   transform: translateY(-20px) scale(0.8);
   transition: all 0.3s ease;
-  
 
-  flex-direction: row-reverse; 
+
+  flex-direction: row-reverse;
 }
 
 .label {
   background: rgba(10, 10, 10, 0.9);
   color: var(--color-gold, #d4af37);
-  padding: 4px 10px; 
+  padding: 4px 10px;
   border-radius: 4px;
-  font-size: 0.8rem; 
+  font-size: 0.8rem;
   font-weight: bold;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(212, 175, 55, 0.3);
   white-space: nowrap;
 }
 
 /* ICONE PICCOLE - RIDOTTE */
 .icon-bubble {
-  width: 35px;  
-  height: 35px; 
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   background: #222;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 0;
   transition: all 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  font-size: 0.9rem; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  font-size: 0.9rem;
 }
 
 .social-item:hover .icon-bubble {
@@ -121,23 +123,56 @@
   transform: translateY(0) scale(1);
 }
 
-.social-widget-container.open .social-item:nth-child(1) { transition-delay: 0.05s; }
-.social-widget-container.open .social-item:nth-child(2) { transition-delay: 0.1s; }
-.social-widget-container.open .social-item:nth-child(3) { transition-delay: 0.15s; }
-.social-widget-container.open .social-item:nth-child(4) { transition-delay: 0.2s; }
-.social-widget-container.open .social-item:nth-child(5) { transition-delay: 0.25s; }
-.social-widget-container.open .social-item:nth-child(6) { transition-delay: 0.3s; }
+.social-widget-container.open .social-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.social-widget-container.open .social-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.social-widget-container.open .social-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+
+.social-widget-container.open .social-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+
+.social-widget-container.open .social-item:nth-child(5) {
+  transition-delay: 0.25s;
+}
+
+.social-widget-container.open .social-item:nth-child(6) {
+  transition-delay: 0.3s;
+}
 
 @keyframes pulse-gold {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-  70% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); } 
-  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
 }
 
 .icon-bubble img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   border-radius: 50%;
   display: block;
+}
+
+/* Stato nascosto (quando il menu mobile è aperto) */
+.social-widget-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }

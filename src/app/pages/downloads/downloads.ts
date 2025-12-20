@@ -36,7 +36,7 @@ export class DownloadsComponent {
     fpsLimit: 120,
     particles: {
       color: {
-        value: "#d4af37", // Gold
+        value: "#d4af37",
       },
       move: {
         direction: MoveDirection.top,
@@ -51,7 +51,6 @@ export class DownloadsComponent {
       number: {
         density: {
           enable: true,
-          // area: 800, // Removed to fix type error
         },
         value: 40,
       },

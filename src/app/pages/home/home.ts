@@ -15,8 +15,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentSlide = signal(0);
   heroImages = [
     '/img/enbarr-home.png',
+    '/img/enbarr-home3.png',
     '/img/enbarr-home2.png',
-    '/img/enbarr-3.png'
+    '/img/enbarr-home4.png',
+    '/img/enbarr-home5.png',
   ];
   private intervalId: any;
 

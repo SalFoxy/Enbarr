@@ -1,18 +1,15 @@
-<div class="social-widget-container" [class.open]="isOpen">
-  
+<div class="social-widget-container" [class.open]="isOpen" [class.hidden]="isHidden">
+
   <div class="social-links-list">
-    <a *ngFor="let link of socialLinks" 
-       [href]="link.url" 
-       target="_blank" 
-       class="social-item"
-       [style.--hover-color]="link.color">
-       
+    <a *ngFor="let link of socialLinks" [href]="link.url" target="_blank" class="social-item"
+      [style.--hover-color]="link.color">
+
       <span class="label">{{ link.label }}</span>
-      
+
       <div class="icon-bubble">
         <img [src]="link.img" [alt]="link.label">
       </div>
-      
+
     </a>
   </div>
 
